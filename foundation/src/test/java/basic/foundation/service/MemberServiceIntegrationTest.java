@@ -2,15 +2,21 @@ package basic.foundation.service;
 
 import basic.foundation.domain.Member;
 import basic.foundation.repository.MemoryMemberRepository;
-
-
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.annotation.Commit;
+import org.springframework.transaction.annotation.Transactional;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
-public class MemberServiceTest {
+@SpringBootTest
+@Transactional
+public class MemberServiceIntegrationTest {
 
     MemberService memberService;
     MemoryMemberRepository memberRepository;
@@ -27,6 +33,7 @@ public class MemberServiceTest {
     }
 
     @Test
+    //@Commit
     void signup() {
         //given
         Member member = new Member();
@@ -35,10 +42,10 @@ public class MemberServiceTest {
         Long saveId = memberService.signup(member);
 
         //then
-        Member result = memberService.findOne(saveId).get();
+        Member findMember = memberService.findOne(saveId).get();
         //Assertions.assertThat(member.getName()).isEqualTo(result.getName());
-        //System.out.println("???");
-        //Assertions.assertThat(member.getName()).isEqualTo(result.getName());
+        assertEquals(member.getName(), findMember.getName());
+        //Assertions.assertEquals(member.getName(), result.getName());
     }
 
     @Test
@@ -54,8 +61,8 @@ public class MemberServiceTest {
 
         //then
         IllegalStateException e = Assertions.assertThrows(IllegalStateException.class, () -> memberService.signup(member2));
-        Assertions.assertEquals(e.getMessage(),"이미 존재하는 회원입니다.");
-
+        //Assertions.assertEquals(e.getMessage(),"이미 존재하는 회원입니다.");
+        assertThat(e.getMessage()).isEqualTo("이미 존재하는 회원입니다.");
     }
 
     @Test

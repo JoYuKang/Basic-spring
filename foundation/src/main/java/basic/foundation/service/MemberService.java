@@ -4,15 +4,19 @@ import basic.foundation.domain.Member;
 import basic.foundation.repository.MemberRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
 
 import java.util.List;
 import java.util.Optional;
 
-@Service
+//@Service
+@Transactional
 public class MemberService {
     private final MemberRepository memberRepository;
 
-    @Autowired
+
+
     public MemberService(MemberRepository memberRepository) {
         this.memberRepository = memberRepository;
     }
@@ -31,11 +35,12 @@ public class MemberService {
         // result.ifPresent(member1 -> {throw new IllegalStateException("이미 존재하는 회원입니다.");});
 
         // 위 코드를 좀 더 간단하게 표현
-        validateDuplicateMember(member);
 
-
+        validateDuplicateMember(member); //중복 회원 검증
+        //System.out.println(member.getName());
         memberRepository.save(member);
         return member.getId();
+
     }
 
     private void validateDuplicateMember(Member member) {
