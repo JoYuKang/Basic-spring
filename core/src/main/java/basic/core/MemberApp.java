@@ -4,8 +4,8 @@ import basic.core.member.*;
 
 public class MemberApp {
     public static void main(String[] args) {
-        MemoryMemberRepository memberRepository = new MemoryMemberRepository();
-        MemberService memberService = new MemberServiceImpl(memberRepository);
+        AppConfig appConfig = new AppConfig();
+        MemberService memberService = appConfig.memberService();
 
         Member member = new Member(1L, "민기", Grade.VIP);
         memberService.join(member);

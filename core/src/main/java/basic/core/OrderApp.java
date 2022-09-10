@@ -7,9 +7,9 @@ import basic.core.order.OrderServiceImpl;
 
 public class OrderApp {
     public static void main(String[] args) {
-        MemberRepository memberRepository = new MemoryMemberRepository();
-        MemberService memberService = new MemberServiceImpl(memberRepository);
-        OrderService orderService = new OrderServiceImpl();
+        AppConfig appConfig = new AppConfig();
+        MemberService memberService = appConfig.memberService();
+        OrderService orderService = appConfig.orderService();
 
         Long memberId = 1L;
         Member member = new Member(memberId,"지원",Grade.VIP);
