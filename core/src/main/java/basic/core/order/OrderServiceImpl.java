@@ -9,7 +9,7 @@ import basic.core.member.MemoryMemberRepository;
 
 public class OrderServiceImpl implements OrderService{
 
-    private final MemberRepository memberRepository;
+    private final MemberRepository  memberRepository;
 
     //private final DiscountPolicy = new FixDiscountPolicy();
     private final DiscountPolicy discountPolicy;
