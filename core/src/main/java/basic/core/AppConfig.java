@@ -12,7 +12,7 @@ import basic.core.order.OrderServiceImpl;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-@Configuration // spring 설정정보
+ @Configuration // spring 설정정보
 public class AppConfig {
     /*
     의존관계 주입을 위해 AppConfig를 만들어서 해당 클래스에서 무엇을 쓸지 결정한다.
@@ -22,22 +22,29 @@ public class AppConfig {
      */
     @Bean
     public MemberService memberService(){
+
+        System.out.println("AppConfig.memberService");
         return new MemberServiceImpl(memberRepository());
     }
 
     @Bean
     public MemberRepository memberRepository() {
+
+        System.out.println("AppConfig.memberRepository");
         return new MemoryMemberRepository();
     }
 
     @Bean
     public OrderService orderService(){
+
+        System.out.println("AppConfig.orderService");
         return new OrderServiceImpl(memberRepository(), discountPolicy());
     }
 
     @Bean
     public DiscountPolicy discountPolicy(){
         //return new FixDiscountPolicy();
+        System.out.println("AppConfig.discountPolicy");
         return new RateDiscountPolicy();
     }
 
