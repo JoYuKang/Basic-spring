@@ -12,7 +12,7 @@ import basic.core.order.OrderServiceImpl;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
- @Configuration // spring 설정정보
+@Configuration // spring 설정정보
 public class AppConfig {
     /*
     의존관계 주입을 위해 AppConfig를 만들어서 해당 클래스에서 무엇을 쓸지 결정한다.
