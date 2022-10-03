@@ -28,7 +28,7 @@ public class ControllerV4HandlerAdapter implements MyHandlerAdapter {
         String viewName = controller.process(paramMap, model);
 
         ModelView modelView = new ModelView(viewName);
-        
+
         modelView.setModel(model);
 
         return modelView;
