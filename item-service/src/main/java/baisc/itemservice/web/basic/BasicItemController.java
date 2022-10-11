@@ -35,7 +35,8 @@ public class BasicItemController {
     }
 
     @GetMapping("/add")
-    public String addForm(){
+    public String addForm(Model model){
+        model.addAttribute("item", new Item());
         return "/basic/addForm";
     }
 
@@ -67,7 +68,7 @@ public class BasicItemController {
     }
     @PostMapping("/{itemId}/edit")
     public String edit(@PathVariable Long itemId, @ModelAttribute Item item){
-        itemRepository.update(itemId, item);
+        itemRepository.update(itemId, item); 
         //model.addAttribute("item", findIt em);
 
         return "redirect:/basic/items/{itemId}";
